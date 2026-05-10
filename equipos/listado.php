@@ -32,10 +32,10 @@
 
         while ($line = pg_fetch_assoc($result)) {
 
-            $nombre = $line["Nombre"];
-            $bandera = $line["Bandera"];
-            $grupo = $line["Grupo"];
-            $id = $line["ID_Equipo"];
+            $nombre = $line["nombre"];
+            $bandera = $line["bandera"];
+            $grupo = $line["grupo"];
+            $id = $line["id_equipo"];
             
                 echo "\t<tr>\n";
                 echo "\t\t<td>$nombre</td>\n";
