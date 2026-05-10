@@ -8,6 +8,5 @@
     $user = getenv('DB_USER');
     $password = getenv('DB_PASSWORD');
 
-    $conn = pg_connect("host=$host port=$port dbname=$dbname
-    user=$user password=$password") or die("No se pudo conectar");
+    $conn = pg_connect("host=$host port=$port dbname=$dbname user=$user password=$password") or die("No se pudo conectar");
 ?>
