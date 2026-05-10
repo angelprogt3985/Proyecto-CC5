@@ -44,7 +44,7 @@
                 echo "\t\t<td>$id</td>\n";
                 echo "\t\t<td><a >
                     <button style='background:red;color:white;'> Eliminar </button></a></td>\n";
-                echo "\t\t<td><a >
+                echo "\t\t<td><a href='editar.php?ID_Equipo=$id&Nombre=$nombre&Bandera=$bandera&Grupo=$grupo'>
                     <button style='background:green;color:white;'> Editar </button></a></td>\n";
                 echo "\t</tr>\n";
         
