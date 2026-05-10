@@ -15,7 +15,7 @@
         $fila = pg_fetch_assoc($result); 
         $total = $fila["total"];
         if($total < 4){
-            $query = "INSERT INTO Equipo VALUES ($id, '$nombre', '$bandera', '$grupo')";
+            $query = "UPDATE Equipo SET Nombre = '$nombre', Bandera = '$bandera', Grupo = '$grupo' WHERE ID_Equipo = $id";
             $result = pg_query($conn, $query) or die('La query fallo: ' .pg_last_error($conn));
             echo "El equipo fue insertado exitosamente";
         } else {
