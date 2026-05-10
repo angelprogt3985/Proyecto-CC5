@@ -17,7 +17,7 @@
             if (!$result){
                 echo "Error: No se puede eliminar el equipo porque tiene partidos asociados";
             } else {
-                echo "Equipo eliminado correctamente";
+                header("Location: listado.php");
             }
         } else {
             header("Location: listado.php");
