@@ -10,25 +10,20 @@
         $bandera = $_POST["Bandera"];
         $grupo = strtoupper($_POST["Grupo"]);
         
-        
-        $check = pg_query($conn, "SELECT * FROM Equipo WHERE ID_Equipo = $id");
-        if(pg_num_rows($check) > 0){
-            echo"Error: El equipo con el id $id ya existe. Ingrese otro equipo";
-        } else {
-            $query = "SELECT COUNT(*) AS total FROM Equipo WHERE Grupo = '$grupo'";
+        $query = "SELECT COUNT(*) AS total FROM Equipo WHERE Grupo = '$grupo'";
+        $result = pg_query($conn, $query) or die('La query fallo: ' .pg_last_error($conn));
+        $fila = pg_fetch_assoc($result); 
+        $total = $fila["total"];
+        if($total < 4){
+            $query = "INSERT INTO Equipo VALUES ($id, '$nombre', '$bandera', '$grupo')";
             $result = pg_query($conn, $query) or die('La query fallo: ' .pg_last_error($conn));
-            $fila = pg_fetch_assoc($result); 
-            $total = $fila["total"];
-            if($total < 4){
-                $query = "INSERT INTO Equipo VALUES ($id, '$nombre', '$bandera', '$grupo')";
-                $result = pg_query($conn, $query) or die('La query fallo: ' .pg_last_error($conn));
-                echo "El equipo fue insertado exitosamente";
-            } else {
-                echo "El grupo $grupo ya esta lleno";
-            }
+            echo "El equipo fue insertado exitosamente";
+        } else {
+            echo "El grupo $grupo ya esta lleno";
         }
-        pg_close($conn);
     }
+        pg_close($conn);
+    
 
 ?>
 
@@ -51,7 +46,8 @@
             $nombre = $_GET["Nombre"];
             $bandera = $_GET["Bandera"];
             $grupo = strtoupper($_GET["Grupo"]);
-            echo "<b>ID del equipo</b>$id<br>\n";
+            echo "<b>ID del equipo: </b>$id<br>\n";
+            echo "<input type = hidden name = ID_Equipo value = $id required><br>";
 
             echo "<b>Nombre del equipo</b>\n";
             echo "<input type = text name = Nombre value = $nombre required><br>\n";
