@@ -20,12 +20,14 @@
         $nombre = "";
         $bandera = "";
         $grupo = "";
+        $id = 0;
         echo "<div style='text-align:center;'>";
         echo "<table border = 1 style = 'margin:auto;'>\n";
         echo "\t<tr>\n";
         echo "\t\t<th><b>Nombre</b></th>\n";
         echo "\t\t<th>Bandera</th>\n";
         echo "\t\t<th>Grupo</th>\n";
+        echo "\t\t<th>ID</th>\n";
         echo "\t</tr>\n";
 
         while ($line = pg_fetch_assoc($result)) {
@@ -33,11 +35,13 @@
             $nombre = $line["Nombre"];
             $bandera = $line["Bandera"];
             $grupo = $line["Grupo"];
+            $id = $line["ID_Equipo"];
             
                 echo "\t<tr>\n";
                 echo "\t\t<td>$nombre</td>\n";
                 echo "\t\t<td>$bandera</td>\n";
                 echo "\t\t<td>$grupo</td>\n";
+                echo "\t\t<td>$id</td>\n";
                 echo "\t\t<td><a >
                     <button style='background:red;color:white;'> Eliminar </button></a></td>\n";
                 echo "\t\t<td><a >
@@ -51,5 +55,6 @@
 
     pg_close($conn);
 ?>
+  </body>
 
 </html>
