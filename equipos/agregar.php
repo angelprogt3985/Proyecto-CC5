@@ -11,7 +11,7 @@
         $grupo = strtoupper($_POST["Grupo"]);
         
         
-        $check = pg_query($conn, "SELECT * FROM Equipos WHERE ID_Equipo = $id");
+        $check = pg_query($conn, "SELECT * FROM Equipo WHERE ID_Equipo = $id");
         if(pg_num_rows($check) > 0){
             echo"Error: El equipo con el id $id ya existe. Ingrese otro equipo";
         } else {
