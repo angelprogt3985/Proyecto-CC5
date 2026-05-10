@@ -45,9 +45,9 @@
                 echo "\t\t<td>$nombre</td>\n";
                 echo "\t\t<td>$bandera</td>\n";
                 echo "\t\t<td>$grupo</td>\n";
-                echo "\t\t<td><a href='eliminar_confirmar.php?codigo=$codigo'>
+                echo "\t\t<td><a >
                     <button style='background:red;color:white;'> Eliminar </button></a></td>\n";
-                echo "\t\t<td><a href='modificar_forma.php?codigo=$codigo&nombre=$nombre&tipo=$tipo'>
+                echo "\t\t<td><a >
                     <button style='background:green;color:white;'> Editar </button></a></td>\n";
                 echo "\t</tr>\n";
         
