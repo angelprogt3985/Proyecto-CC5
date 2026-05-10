@@ -26,7 +26,7 @@
 
 <html>
   <head>
-    <link rel = "stylesheet" href = "estilo.css">
+    <link rel = "stylesheet" href = "../style.css">
      <title>
          Equipos - Insertar
      </title>
@@ -56,5 +56,9 @@
             </button>
 
     </form>
+    <center>
+         <a href="listado.php"> Listado de equipos </a><br>
+         <a href="../index.php"> Menu Principal </a>
+     </center>
 </body>
 </html>

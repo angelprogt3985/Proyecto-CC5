@@ -55,6 +55,9 @@
 
     pg_close($conn);
 ?>
+    <center>
+         <a href="agregar.php"> Agregar Equipo </a><br>
+         <a href="../index.php"> Menu Principal</a>
+     </center>
   </body>
-
 </html>
