@@ -17,7 +17,7 @@
         if($total < 4){
             $query = "UPDATE Equipo SET Nombre = '$nombre', Bandera = '$bandera', Grupo = '$grupo' WHERE ID_Equipo = $id";
             $result = pg_query($conn, $query) or die('La query fallo: ' .pg_last_error($conn));
-            echo "El equipo fue insertado exitosamente";
+            echo "El equipo fue editado exitosamente";
         } else {
             echo "El grupo $grupo ya esta lleno";
         }
