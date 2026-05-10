@@ -1,5 +1,5 @@
 <?php
-    require '../Proyecto-CC5/postsql.php'
+    require '../postsql.php'
 ?>
 <html>  
   <head>
