@@ -63,6 +63,7 @@
             echo "<input type = hidden name = Grupo maxlength = 1 
         pattern = [A-La-l] style = text-transform: uppercase; value = $grupo required><br>";
         ?>
+        <h4>¿Quieres eliminar el equipo?</h4>
         <button type = "submit" name = "decision" value = "si">
                 Si
             </button>
