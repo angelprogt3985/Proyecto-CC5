@@ -2,7 +2,7 @@
     $host = getenv('DB_HOST');
     $port = getenv('DB_PORT');
     if (!$post) {
-        $port = '5432';
+        $post = '5432';
     }
     $dbname = getenv('DB_NAME');
     $user = getenv('DB_USER');
