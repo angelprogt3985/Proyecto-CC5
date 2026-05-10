@@ -1,5 +1,5 @@
 <?php
-    require '../postsql.php'
+    require __DIR__ . '/../postsql.php';
 ?>
 <html>  
   <head>
@@ -33,13 +33,6 @@
             $nombre = $line["Nombre"];
             $bandera = $line["Bandera"];
             $grupo = $line["Grupo"];
-            $tipos = [
-                'A' => 'Activo',
-                'P' => 'Pasivo',
-                'C' => 'Capital',
-                'I' => 'Ingreso',
-                'G' => 'Gasto'
-            ];
             
                 echo "\t<tr>\n";
                 echo "\t\t<td>$nombre</td>\n";
