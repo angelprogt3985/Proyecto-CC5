@@ -15,7 +15,7 @@
 
         <button>Ver Quiniela</button>
         
-        <a href="equipos/listado.php" class = "button">Agregar Equipo</a>
+        <a href="equipos/agregar.php" class = "button">Agregar Equipo</a>
         <button>Editar Equipo</button>
         
         <a href="equipos/listado.php" class = "button">Listar Equipos</a>
