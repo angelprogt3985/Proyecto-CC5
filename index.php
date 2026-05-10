@@ -19,6 +19,7 @@
         <button>Editar Equipo</button>
         
         <a href="equipos/listado.php" class = "button">Listar Equipos</a>
+        <a href="calendario/listado.php" class="button">Calendario</a>
         <button>Ver Resultados</button>
 
     </div>
