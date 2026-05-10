@@ -15,9 +15,17 @@
         if(pg_num_rows($check) > 0){
             echo"Error: El equipo con el id $id ya existe. Ingrese otro equipo";
         } else {
-            $query = "INSERT INTO Equipo VALUES ($id, '$nombre', '$bandera', '$grupo')";
+            $query = "SELECT COUNT(*) AS total FROM Equipo WHERE Grupo = '$grupo'";
             $result = pg_query($conn, $query) or die('La query fallo: ' .pg_last_error($conn));
-            echo "El equipo fue insertado exitosamente";
+            $fila = pg_fetch_assoc($result); 
+            $total = $fila["total"];
+            if($total < 4){
+                $query = "INSERT INTO Equipo VALUES ($id, '$nombre', '$bandera', '$grupo')";
+                $result = pg_query($conn, $query) or die('La query fallo: ' .pg_last_error($conn));
+                echo "El equipo fue insertado exitosamente";
+            } else {
+                echo "El grupo $grupo ya esta lleno";
+            }
         }
         pg_close($conn);
     }
