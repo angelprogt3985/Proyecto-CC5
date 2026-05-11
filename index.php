@@ -20,6 +20,7 @@
         
         <a href="equipos/listado.php" class = "button">Listar Equipos</a>
         <a href="calendario/listado.php" class="button">Calendario</a>
+        <a href="grupos/tablas.php" class="button">Tablas de grupos</a>
         <button>Ver Resultados</button>
 
     </div>
