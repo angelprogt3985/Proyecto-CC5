@@ -43,12 +43,14 @@
                 echo "\t\t<td>$bandera</td>\n";
                 echo "\t\t<td>$grupo</td>\n";
                 echo "\t\t<td>$id</td>\n";
-                echo "\t\t<td><a href='eliminar.php?ID_Equipo=$id&Nombre=$nombre&Bandera=$bandera&Grupo=$grupo'>
-                    <button style='background:red;color:white;'> Eliminar </button></a></td>\n";
-                echo "\t\t<td><a href='editar.php?ID_Equipo=$id&Nombre=$nombre&Bandera=$bandera&Grupo=$grupo'>
-                    <button style='background:green;color:white;'> Editar </button></a></td>\n";
+                if ($_SESSION["id"] == 0){
+                    echo "\t\t<td><a href='eliminar.php?ID_Equipo=$id&Nombre=$nombre&Bandera=$bandera&Grupo=$grupo'>
+                        <button style='background:red;color:white;'> Eliminar </button></a></td>\n";
+                    echo "\t\t<td><a href='editar.php?ID_Equipo=$id&Nombre=$nombre&Bandera=$bandera&Grupo=$grupo'>
+                        <button style='background:green;color:white;'> Editar </button></a></td>\n";
+                }
                 echo "\t</tr>\n";
-        
+                    
         }
         echo "</table>\n";
         echo "</div>";
