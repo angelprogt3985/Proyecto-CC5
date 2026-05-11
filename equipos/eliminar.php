@@ -1,7 +1,7 @@
 <?php
     require __DIR__ . '/../auth.php';
     require __DIR__ . '/../postsql.php';
-    if($_SESSION["id"] != 0){
+    if(!$_SESSION["admin"]){
         header("Location: ../login.php");
         exit;
     }

@@ -21,7 +21,7 @@
         <button>Ver Quiniela</button>
         
         <?php
-            if ($_SESSION["id"] == 0){
+            if($_SESSION["admin"]){
                 echo "<a href=equipos/agregar.php class=button>Agregar Equipo</a><br>";
             }
         ?>
