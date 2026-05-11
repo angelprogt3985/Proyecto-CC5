@@ -1,6 +1,10 @@
 <?php
+    require __DIR__ . '/../auth.php';
     require __DIR__ . '/../postsql.php';
-
+    if(!$_SESSION["admin"]){
+        header("Location: ../login.php");
+        exit;
+    }
     $mensaje = "";
 
     if($_SERVER["REQUEST_METHOD"] == "POST"){
