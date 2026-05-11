@@ -28,6 +28,10 @@
         }
         ?>
     </select>
+
+    <!-- agrego el input de fecha, el value mantiene lo que escribio el usuario -->
+    Fecha: <input type="date" name="fecha" value="<?= htmlspecialchars($_GET['fecha'] ?? '') ?>">
+
     <input type="submit" value="Filtrar">
     <a href="listado.php">Limpiar</a>
 </form>
@@ -42,6 +46,12 @@ $p      = 1;
 if (!empty($_GET['id_fase'])) {
     $where[]  = "p.ID_Fase = $" . $p++;
     $params[] = intval($_GET['id_fase']);
+}
+
+// si viene fecha la agrego al where, funciona solo o combinado con fase
+if (!empty($_GET['fecha'])) {
+    $where[]  = "p.Fecha = $" . $p++;
+    $params[] = $_GET['fecha'];
 }
 
 $sql = "SELECT p.Id_Partido, p.Fecha, p.Hora,
@@ -89,3 +99,5 @@ pg_close($conn);
 ?>
 </body>
 </html>
+
+ 
