@@ -22,7 +22,7 @@ foreach($grupos as $grupo){
         WHERE grupo = '$grupo'
     ";
 
-    $resultadoEquipos = pg_query($conexion, $sqlEquipos);
+    $resultadoEquipos = pg_query($conn, $sqlEquipos);
 
     echo "<h2>Grupo $grupo</h2>";
 
@@ -61,7 +61,7 @@ foreach($grupos as $grupo){
             OR id_equipo2 = $idEquipo
         ";
 
-        $resultadoPartidos = pg_query($conexion, $sqlPartidos);
+        $resultadoPartidos = pg_query($conn, $sqlPartidos);
 
         while($partido = pg_fetch_assoc($resultadoPartidos)){
 
