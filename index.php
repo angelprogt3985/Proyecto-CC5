@@ -34,7 +34,8 @@
         <a href="grupos/tablas.php" class="button">Tablas de grupos</a><br>
 
         <button>Ver Resultados</button>
-
+        
+        <a href="logout.php" class="button">Cerrar sesion</a><br>
     </div>
 
 </body>
