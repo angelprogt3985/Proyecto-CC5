@@ -6,7 +6,7 @@
     <title>Agregar Partido</title>
 </head>
 <body>
-<h2>Agregar Partido - Fase 1</h2>
+<h2>Agregar Partido </h2>
 
 <a href="listado.php">Ver calendario</a>
 
