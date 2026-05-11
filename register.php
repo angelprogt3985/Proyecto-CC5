@@ -1,6 +1,6 @@
 <?php
     session_start();
-    require __DIR__ . '/../postsql.php';
+    require __DIR__ . '/postsql.php';
 
     $mensaje = "";
 

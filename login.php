@@ -4,7 +4,7 @@
         header("Location: index.php");
         exit;
     }
-    require __DIR__ . '/../postsql.php';
+    require __DIR__ . '/postsql.php';
 
     $mensaje = "";
     
