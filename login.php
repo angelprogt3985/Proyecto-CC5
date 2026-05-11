@@ -14,7 +14,7 @@
 
         $query = "SELECT * FROM Usuario WHERE Correo = '$correo' AND TRIM(Contraseña) = '$contrasena'";
         $result = pg_query($conn, $query) or die ('La query fallo: ' .pg_last_error($conn));
-        if(pg_num_rows($result)){
+        if(pg_num_rows($result) == 0){
             echo "Error: Las credenciales son incorrectas";
         } else {
             $usuario = pg_fetch_assoc($result);
@@ -50,7 +50,7 @@
         <input type = "text" name = "Correo" required><br>
 
         <b>Contraseña</b>
-        <input type = "text" name = "Contraseña" required><br>
+        <input type = "text" name = "Contrasena" required><br>
 
         <button type = "submit">
                 Enviar

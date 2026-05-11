@@ -2,7 +2,7 @@
     require __DIR__ . '/../auth.php';
     require __DIR__ . '/../postsql.php';
     if(!$_SESSION["admin"]){
-        header("Location: /login.php");
+        header("Location: ../login.php");
         exit;
     }
     $mensaje = "";
