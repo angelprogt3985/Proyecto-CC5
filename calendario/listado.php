@@ -29,7 +29,6 @@
         ?>
     </select>
 
-    <!-- agrego el input de fecha, el value mantiene lo que escribio el usuario -->
     Fecha: <input type="date" name="fecha" value="<?= htmlspecialchars($_GET['fecha'] ?? '') ?>">
 
     <input type="submit" value="Filtrar">
@@ -48,7 +47,6 @@ if (!empty($_GET['id_fase'])) {
     $params[] = intval($_GET['id_fase']);
 }
 
-// si viene fecha la agrego al where, funciona solo o combinado con fase
 if (!empty($_GET['fecha'])) {
     $where[]  = "p.Fecha = $" . $p++;
     $params[] = $_GET['fecha'];
