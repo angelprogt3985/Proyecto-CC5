@@ -1,6 +1,9 @@
 <?php
-
     session_start();
+    if(isset($_SESSION["id"])){
+        header("Location: index.php");
+        exit;
+    }
     require __DIR__ . '/../postsql.php';
 
     $mensaje = "";

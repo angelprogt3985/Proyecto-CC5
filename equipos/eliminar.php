@@ -1,4 +1,5 @@
 <?php
+    require __DIR__ . '/../auth.php';
     require __DIR__ . '/../postsql.php';
     if($_SESSION["id"] != 0){
         header("Location: login.php");
