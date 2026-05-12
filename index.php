@@ -18,7 +18,7 @@
 
         <h1>Quiniela</h1>
 
-        <button>Ver Quiniela</button>
+        <a href="quinielas/listado.php" class = "button">Ver Quiniela</a><br>
         
         <?php
             if($_SESSION["admin"]){
