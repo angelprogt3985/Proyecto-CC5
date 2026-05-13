@@ -15,6 +15,21 @@
     $pred_gol2 = $_POST["goles2"];
     $puntos_obt = 0;
 
+    $query = "INSERT INTO Prediccion
+              (ID_Pred, Id_Partido, ID_usuario, pred_gol1, pred_gol2, puntos_obt)
+              VALUES
+              ('$id_pred', '$id_partido', '$id_usuario', '$pred_gol1', '$pred_gol2', '$puntos_obt')";
+
+    $result = pg_query($conn, $query);
+
+    if($result){
+        echo "Predicción guardada";
+    } else {
+        echo "Error al guardar";
+    }
+
+    pg_close($conn);
+
     }
 }
 
