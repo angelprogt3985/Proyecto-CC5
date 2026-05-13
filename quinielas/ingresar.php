@@ -21,7 +21,6 @@
   <body>
     <h1>Agregar equipo</h1>
     <?php
-        echo $mensaje;
     ?>
 
     <form method = "post">
