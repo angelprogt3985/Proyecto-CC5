@@ -31,12 +31,12 @@
     $id = $_SESSION["id"];
     if ($_SESSION["admin"]){
         $query = "SELECT p.id_partido, p.fecha, p.hora, pr.pred_gol1, pr.pred_gol2, pr.puntos_obt, 
-            p.goles_equip1, p.goles_equip2, F.nombre AS Fase, E1.nombre AS E_Local, 
+            p.goles_equip1, p.goles_equip2, E1.nombre AS E_Local, 
             E2.nombre AS E_visitante
             FROM Prediccion pr
             JOIN Partido p ON pr.id_partido = p.id_partido
-            JOIN Equipo E1 ON pr.id_equipo = E1.id_equipo
-            JOIN Equipo E2 ON pr.id_equipo = E2.id_equipo
+            JOIN Equipo E1 ON pr.id_equipo1 = E1.id_equipo
+            JOIN Equipo E2 ON pr.id_equipo2 = E2.id_equipo
             ORDER BY pr.ID_usuario";
 
         $result = pg_query($conn, $query) or die('La query fallo: ' .pg_last_error($conn));
@@ -101,12 +101,12 @@
         
     } else {      
         $query = "SELECT p.id_partido, p.fecha, p.hora, pr.pred_gol1, pr.pred_gol2, pr.puntos_obt, 
-        p.goles_equip1, p.goles_equip2, F.nombre AS Fase, E1.nombre AS E_Local, 
+        p.goles_equip1, p.goles_equip2, E1.nombre AS E_Local, 
         E2.nombre AS E_visitante
         FROM Prediccion pr
         JOIN Partido p ON pr.id_partido = p.id_partido
-        JOIN Equipo E1 ON pr.id_equipo = E1.id_equipo
-        JOIN Equipo E2 ON pr.id_equipo = E2.id_equipo
+        JOIN Equipo E1 ON pr.id_equipo1 = E1.id_equipo
+        JOIN Equipo E2 ON pr.id_equipo2 = E2.id_equipo
         WHERE pr.id_usuario = $id";
 
         $result = pg_query($conn, $query) or die('La query fallo: ' .pg_last_error($conn));
