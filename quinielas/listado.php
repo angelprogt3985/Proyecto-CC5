@@ -174,7 +174,21 @@
 ?>
     <?php 
         if(!$_SESSION["admin"]){
-            echo "<button type = submit> Actualizar predicciones </button>";
+            $query = "SELECT p.id_partido, p.fecha, p.hora, pr.pred_gol1, pr.pred_gol2, pr.puntos_obt, 
+            p.goles_equip1, p.goles_equip2, E1.nombre AS E_Local, 
+            E2.nombre AS E_visitante
+            FROM Prediccion pr
+            JOIN Partido p ON pr.id_partido = p.id_partido
+            JOIN Equipo E1 ON p.id_equipo1 = E1.id_equipo
+            JOIN Equipo E2 ON p.id_equipo2 = E2.id_equipo
+            WHERE pr.id_usuario = $id";
+
+            $result = pg_query($conn, $query) or die('La query fallo: ' .pg_last_error($conn));
+            if(pg_num_rows($result) == 0){
+                echo "No hay quinielas";
+            } else {
+                echo "<button type = submit> Actualizar predicciones </button>";
+            }
         }
     ?>
 </form>
