@@ -170,7 +170,7 @@
         }
     }
 
-    pg_close($conn);
+    
 ?>
     <?php 
         if(!$_SESSION["admin"]){
