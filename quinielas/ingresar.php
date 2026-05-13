@@ -11,7 +11,7 @@
 
 ?>
 
-<html>
+<html>             
   <head>
     <link rel = "stylesheet" href = "../style.css">
      <title>
@@ -30,12 +30,13 @@
         <b>ID del partido</b>
         <input type = "text" name = "Nombre" required><br>
 
-        <b>Bandera</b>
-        <input type = "text" name = "Bandera" required><br>
+        <b>Goles equipo 1</b>
+        <input type = "text" name = "goles1" required><br>
 
-        <b>Grupo</b>
-        <input type = "text" name = "Grupo" maxlength = "1" 
-        pattern = "[A-La-l]" style = "text-transform: uppercase;" required><br>
+        <b>Goles equipo 2</b>
+        <input type = "text" name = "goles2" required><br>
+
+        
 
         <button type = "submit">
                 Enviar
