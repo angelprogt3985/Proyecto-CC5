@@ -10,10 +10,11 @@
             WHERE ID_Partido = $id_partido AND ID_usuario = $id AND (pred_gol1 != $predL
             AND pred_gol2 != $predV)";
 
+            pg_query($conn, $query) or die('La query fallo: ' .pg_last_error($conn));
         }
     }
 
-    $result = pg_query($conn, $query) or die('La query fallo: ' .pg_last_error($conn));
+
 
 ?>
 <html>  
