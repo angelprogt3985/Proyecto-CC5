@@ -35,8 +35,8 @@
             E2.nombre AS E_visitante
             FROM Prediccion pr
             JOIN Partido p ON pr.id_partido = p.id_partido
-            JOIN Equipo E1 ON pr.id_equipo1 = E1.id_equipo
-            JOIN Equipo E2 ON pr.id_equipo2 = E2.id_equipo
+            JOIN Equipo E1 ON p.id_equipo1 = E1.id_equipo
+            JOIN Equipo E2 ON p.id_equipo2 = E2.id_equipo
             ORDER BY pr.ID_usuario";
 
         $result = pg_query($conn, $query) or die('La query fallo: ' .pg_last_error($conn));
@@ -105,8 +105,8 @@
         E2.nombre AS E_visitante
         FROM Prediccion pr
         JOIN Partido p ON pr.id_partido = p.id_partido
-        JOIN Equipo E1 ON pr.id_equipo1 = E1.id_equipo
-        JOIN Equipo E2 ON pr.id_equipo2 = E2.id_equipo
+        JOIN Equipo E1 ON p.id_equipo1 = E1.id_equipo
+        JOIN Equipo E2 ON p.id_equipo2 = E2.id_equipo
         WHERE pr.id_usuario = $id";
 
         $result = pg_query($conn, $query) or die('La query fallo: ' .pg_last_error($conn));
