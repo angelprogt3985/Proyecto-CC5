@@ -184,9 +184,7 @@
             WHERE pr.id_usuario = $id";
 
             $result = pg_query($conn, $query) or die('La query fallo: ' .pg_last_error($conn));
-            if(pg_num_rows($result) == 0){
-                echo "No hay quinielas";
-            } else {
+            if(pg_num_rows($result) != 0){
                 echo "<button type = submit> Actualizar predicciones </button>";
             }
         }
@@ -197,7 +195,7 @@
             if(!$_SESSION["admin"]){
                     echo "<a href=ingresar.php> Ingresar Prediccion </a><br>";
                 } else {
-                    echo "<a> Ingresar Resultado </a>";
+                    echo "<a> Ingresar Resultado </a><br>";
                 }
         ?>
          
