@@ -4,10 +4,19 @@
 
 
     if($_SERVER["REQUEST_METHOD"] == "POST"){
-        
 
+    if($_SERVER["REQUEST_METHOD"] == "POST"){
+
+    $id_usuario = $_SESSION["id"];
+
+    $id_pred = $_POST["ID_Pred"];
+    $id_partido = $_POST["Id_Partido"];
+    $pred_gol1 = $_POST["goles1"];
+    $pred_gol2 = $_POST["goles2"];
+    $puntos_obt = 0;
 
     }
+}
 
 ?>
 
