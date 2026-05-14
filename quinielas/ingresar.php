@@ -4,14 +4,38 @@
 
 
     if($_SERVER["REQUEST_METHOD"] == "POST"){
-        
 
+    if($_SERVER["REQUEST_METHOD"] == "POST"){
+
+    $id_usuario = $_SESSION["id"];
+
+    $id_pred = $_POST["ID_Pred"];
+    $id_partido = $_POST["Id_Partido"];
+    $pred_gol1 = $_POST["goles1"];
+    $pred_gol2 = $_POST["goles2"];
+    $puntos_obt = 0;
+
+    $query = "INSERT INTO Prediccion
+              (ID_Pred, Id_Partido, ID_usuario, pred_gol1, pred_gol2, puntos_obt)
+              VALUES
+              ('$id_pred', '$id_partido', '$id_usuario', '$pred_gol1', '$pred_gol2', '$puntos_obt')";
+
+    $result = pg_query($conn, $query);
+
+    if($result){
+        echo "Predicción guardada";
+    } else {
+        echo "Error al guardar";
+    }
+
+    pg_close($conn);
 
     }
+}
 
 ?>
 
-<html>
+<html>             
   <head>
     <link rel = "stylesheet" href = "../style.css">
      <title>
@@ -21,7 +45,6 @@
   <body>
     <h1>Agregar equipo</h1>
     <?php
-        echo $mensaje;
     ?>
 
     <form method = "post">
@@ -31,12 +54,13 @@
         <b>ID del partido</b>
         <input type = "text" name = "Nombre" required><br>
 
-        <b>Bandera</b>
-        <input type = "text" name = "Bandera" required><br>
+        <b>Goles equipo 1</b>
+        <input type = "text" name = "goles1" required><br>
 
-        <b>Grupo</b>
-        <input type = "text" name = "Grupo" maxlength = "1" 
-        pattern = "[A-La-l]" style = "text-transform: uppercase;" required><br>
+        <b>Goles equipo 2</b>
+        <input type = "text" name = "goles2" required><br>
+
+        
 
         <button type = "submit">
                 Enviar
