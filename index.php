@@ -25,6 +25,12 @@
                 echo "<a href=equipos/agregar.php class=button>Agregar Equipo</a><br>";
             }
         ?>
+
+         <?php
+            if($_SESSION["admin"]){
+                echo "<a href=fases/agregar_fase.php class=button>Agregar Fase</a><br>";
+            }
+        ?>
         
         
         <a href="equipos/listado.php" class = "button">Listar Equipos</a><br>
