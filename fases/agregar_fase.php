@@ -17,7 +17,6 @@
         if(pg_num_rows($check) > 0){
             echo"Error: El equipo con el id $id ya existe. Ingrese otro equipo";
         } else {
-            // Verificar cuántas fases hay registradas
             $query = "SELECT COUNT(*) AS total FROM Fase";
             $result = pg_query($conn, $query)
                     or die('La query fallo: ' . pg_last_error($conn));
