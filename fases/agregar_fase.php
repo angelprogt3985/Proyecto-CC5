@@ -80,7 +80,7 @@
 
     </form>
     <center>
-         <a href="listado.php"> Listado de equipos </a><br>
+         <a href="listado_fase.php">Listado de Fases</a><br>
          <a href="../index.php"> Menu Principal </a>
      </center>
 </body>
