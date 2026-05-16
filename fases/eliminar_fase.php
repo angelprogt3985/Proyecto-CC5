@@ -23,12 +23,12 @@
             if(!$result){
                 echo "Error: No se puede eliminar la fase.";
             } else {
-                header("Location: listado.php");
+                header("Location: listado_fase.php");
                 exit;
             }
 
         } else {
-            header("Location: listado.php");
+            header("Location: listado_fase.php");
             exit;
         }
     }
