@@ -92,8 +92,8 @@
     </form>
 
     <center>
-         <a href="listado.php">Listado de fases</a><br>
-         <a href="agregar.php">Agregar fase</a><br>
+         <a href="listado_fase.php">Listado de fases</a><br>
+         <a href="agregar_fase.php">Agregar fase</a><br>
          <a href="../index.php">Menu Principal</a>
     </center>
 
