@@ -11,7 +11,7 @@
 
         $id = $_POST["ID_Fase"];
         $nombre = $_POST["Nombre"];
-        $bandera = $_POST["Orden"];        
+        $orden = $_POST["Orden"];        
         
         $check = pg_query($conn, "SELECT * FROM Fase WHERE ID_Fase = $id");
         if(pg_num_rows($check) > 0){
