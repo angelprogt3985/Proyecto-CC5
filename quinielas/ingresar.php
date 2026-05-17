@@ -2,36 +2,53 @@
     require __DIR__ . '/../auth.php';
     require __DIR__ . '/../postsql.php';
 
-
+    if($_SESSION["admin"]){
+        header("Location: ../login.php");
+        exit;
+    }
     if($_SERVER["REQUEST_METHOD"] == "POST"){
+        
+        $id_partido = $_POST["partido"];
+        $id_usuario = $_SESSION["id"];
 
-    if($_SERVER["REQUEST_METHOD"] == "POST"){
+        $pred_gol1 = $_POST["goles1"];
+        $pred_gol2 = $_POST["goles2"];
+        $puntos_obt = 0;
 
-    $id_usuario = $_SESSION["id"];
+        $query = "INSERT INTO Prediccion
+                (ID_Pred, Id_Partido, ID_usuario, pred_gol1, pred_gol2, puntos_obt)
+                VALUES
+                ((SELECT COALESCE(MAX(ID_Pred),0) + 1 FROM Prediccion), 
+                $id_partido, $id_usuario, $pred_gol1, $pred_gol2, $puntos_obt)";
 
-    $id_pred = $_POST["ID_Pred"];
-    $id_partido = $_POST["Id_Partido"];
-    $pred_gol1 = $_POST["goles1"];
-    $pred_gol2 = $_POST["goles2"];
-    $puntos_obt = 0;
+        $result = pg_query($conn, $query);
 
-    $query = "INSERT INTO Prediccion
-              (ID_Pred, Id_Partido, ID_usuario, pred_gol1, pred_gol2, puntos_obt)
-              VALUES
-              ('$id_pred', '$id_partido', '$id_usuario', '$pred_gol1', '$pred_gol2', '$puntos_obt')";
+        if($result){
+            echo "Predicción guardada";
+        } else {
+            echo "Error al guardar";
+        }
 
-    $result = pg_query($conn, $query);
+        pg_close($conn);
 
-    if($result){
-        echo "Predicción guardada";
-    } else {
-        echo "Error al guardar";
     }
 
-    pg_close($conn);
+    $queryP = "SELECT P.Id_Partido, E1.Nombre AS ELocal, E2.Nombre AS EVisitante
+        FROM Partido P
+        JOIN Equipo E1 ON P.ID_equipo1 = E1.ID_equipo
+        JOIN Equipo E2 ON P.ID_equipo2 = E2.ID_equipo
+        ORDER BY P.Fecha";
+        
 
+    $resultP = pg_query($conn, $queryP);
+    $options = "";
+    while ($fila = pg_fetch_assoc($resultP)) {
+        $options .= "<option value='{$fila["id_partido"]}'>";
+        $options .= trim($fila["elocal"]) . " vs " . trim($fila["evisitante"]);
+        $options .= "</option>";
     }
-}
+    
+
 
 ?>
 
@@ -48,17 +65,16 @@
     <?php
     ?>
 
-    <form method = "post">
-        <b>ID de la predicción</b>
-        <input type = "number" name = "ID_Pred" required><br>
+    <form method = "post" autocomplete = "off">
+        <b> Partido </b>
+        <select name="partido">
+            <?php echo $options; ?>
+        </select><br>
 
-        <b>ID del partido</b>
-        <input type = "text" name = "Nombre" required><br>
-
-        <b>Goles equipo 1</b>
+        <b>Goles equipo Local</b>
         <input type = "text" name = "goles1" required><br>
 
-        <b>Goles equipo 2</b>
+        <b>Goles equipo Visitante</b>
         <input type = "text" name = "goles2" required><br>
 
         
