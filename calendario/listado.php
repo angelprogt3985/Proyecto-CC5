@@ -19,6 +19,9 @@
         if($_SESSION["admin"]){
             echo "| ";
             echo "<a href=agregar_partido.php>Agregar Partido</a>";
+
+            echo " | ";
+            echo "<a href=Resultado.php>Agregar Resultado</a>";
         }
     ?>
 

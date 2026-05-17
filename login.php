@@ -44,13 +44,13 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <form method = "post">
+    <form method = "post" autocomplete = "off">
 <!--Temporalmente inician con correo y contraseña-->
         <b>Correo</b>
         <input type = "text" name = "Correo" required><br>
 
         <b>Contraseña</b>
-        <input type = "text" name = "Contrasena" required><br>
+        <input type = "password" name = "Contrasena" required><br>
 
         <button type = "submit">
                 Enviar

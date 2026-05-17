@@ -92,10 +92,10 @@ $hora  = substr($partido['hora'], 0, 5);
 <?php if ($partido['goles_equip1'] === null): ?>
 <form method="POST">
     <b><?= htmlspecialchars($partido['equipo1']) ?></b>
-    <input type="number" name="goles1" min="0" max="99"
+    <input type="number" name="goles1" min="0" 
            value="<?= htmlspecialchars($_POST['goles1'] ?? '') ?>" required style="width:50px; text-align:center;">
     -
-    <input type="number" name="goles2" min="0" max="99"
+    <input type="number" name="goles2" min="0" 
            value="<?= htmlspecialchars($_POST['goles2'] ?? '') ?>" required style="width:50px; text-align:center;">
     <b><?= htmlspecialchars($partido['equipo2']) ?></b>
 
