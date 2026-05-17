@@ -5,6 +5,7 @@
 <html>  
   <head>
    <link rel = "stylesheet" href = "../style.css">
+   <meta charset="UTF-8">
      <title>
         Equipos - Listado
      </title>
@@ -59,7 +60,12 @@
     pg_close($conn);
 ?>
     <center>
-         <a href="agregar.php"> Agregar Equipo </a><br>
+
+        <?php 
+            if($_SESSION["admin"]){
+                    echo "<a href=agregar.php> Agregar Equipo </a><br>";
+                } 
+        ?>
          <a href="../index.php"> Menu Principal</a>
      </center>
   </body>

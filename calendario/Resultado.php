@@ -1,7 +1,15 @@
-<?php require __DIR__ . '/../postsql.php'; ?>
+<?php 
+    require __DIR__ . '/../auth.php';
+    require __DIR__ . '/../postsql.php';
+    if(!$_SESSION["admin"]){
+        header("Location: ../login.php");
+        exit;
+    }
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <link rel = "stylesheet" href = "../style.css">
     <meta charset="UTF-8">
     <title>Ingresar Resultado</title>
 </head>

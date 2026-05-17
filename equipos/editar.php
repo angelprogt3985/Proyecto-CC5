@@ -34,6 +34,7 @@
 <html>
   <head>
     <link rel = "stylesheet" href = "../style.css">
+    <meta charset="UTF-8">
      <title>
          Equipos - Editar
      </title>
