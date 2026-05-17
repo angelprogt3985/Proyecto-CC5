@@ -20,6 +20,7 @@
 <html>  
   <head>
    <link rel = "stylesheet" href = "../style.css">
+   <meta charset="UTF-8">
      <title>
         Quinielas - Listado
      </title>
@@ -85,7 +86,12 @@
                     }
 
                     echo "\t\t<td>$predGolL - $predGolV</td>\n";
-                    echo "\t\t<td>$puntos</td>\n";
+
+                    if(isset($golesL)){
+                        echo "\t\t<td>$puntos</td>\n";
+                    } else {
+                        echo "Por definirse";
+                    }
                     
                     echo "\t\t<td><a >
                         <button style='background:red;color:white;'> Editar Quiniela </button></a></td>\n";

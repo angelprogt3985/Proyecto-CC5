@@ -1,16 +1,27 @@
-<?php require __DIR__ . '/../postsql.php'; ?>
+<?php
+    require __DIR__ . '/../auth.php';
+    require __DIR__ . '/../postsql.php';
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <link rel = "stylesheet" href = "../style.css">
     <meta charset="UTF-8">
     <title>Calendario de Partidos</title>
 </head>
 <body>
 
-<h2>Calendario de Partidos</h2>
+    <h2>Calendario de Partidos</h2>
 
-<a href="../index.php">Inicio</a> |
-<a href="agregar_partido.php">Agregar Partido</a>
+    <a href="../index.php">Inicio</a> 
+
+    <?php 
+        if($_SESSION["admin"]){
+            echo "| ";
+            echo "<a href=agregar_partido.php>Agregar Partido</a>";
+        }
+    ?>
+
 
 <br><br>
 
