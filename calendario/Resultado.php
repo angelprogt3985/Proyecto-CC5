@@ -70,6 +70,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         );
 
         if ($upd) {
+            pg_query_params($conn,
+                "UPDATE Prediccion SET puntos_obt =
+                    CASE
+                        WHEN pred_gol1 = $1 AND pred_gol2 = $2 THEN 6
+                        WHEN SIGN(pred_gol1 - pred_gol2) = SIGN($1 - $2) THEN 3
+                        ELSE 0
+                    END
+                 WHERE Id_Partido = $3",
+                [intval($goles1), intval($goles2), $id]
+            );
             $mensaje = "Resultado guardado: {$partido['equipo1']} {$goles1} - {$goles2} {$partido['equipo2']}.";
             $partido['goles_equip1'] = intval($goles1);
             $partido['goles_equip2'] = intval($goles2);
