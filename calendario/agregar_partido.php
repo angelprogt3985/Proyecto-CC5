@@ -35,25 +35,45 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } elseif ($id_equipo1 === $id_equipo2) {
         $mensaje = 'Un equipo no puede jugar contra si mismo.';
     } else {
-        $check = pg_query_params($conn,
+        $fase_grupo = false;
+
+        if($id_fase == 1){
+            $checkL = "SELECT Grupo FROM Equipo WHERE ID_Equipo = $id_equipo1";
+            $resultL = pg_query($conn, $checkL);
+            $lineL = pg_fetch_assoc($resultL);
+            $grupoL = $lineL["grupo"];
+
+            $checkV = "SELECT Grupo FROM Equipo WHERE ID_Equipo = $id_equipo2"; 
+            $resultV = pg_query($conn, $checkV);
+            $lineV = pg_fetch_assoc($resultV);
+            $grupoV = $lineV["grupo"];
+
+            if($grupoL !== $grupoV){
+                $mensaje = 'Error: Dos equipos de grupos distintos no pueden enfrentarse entre si.';
+                $fase_grupo = true;
+            }
+        }
+        if(!$fase_grupo){
+            $check = pg_query_params($conn,
             "SELECT Id_Partido FROM Partido
              WHERE Fecha = $1 AND Hora = $2
                AND (ID_equipo1 IN ($3, $4) OR ID_equipo2 IN ($3, $4))",
             [$fecha, $hora, $id_equipo1, $id_equipo2]
-        );
-
-        if (pg_num_rows($check) > 0) {
-            $mensaje = 'Traslape detectado: uno de los equipos ya tiene un partido programado a esa fecha y hora.';
-        } else {
-            $next_id = pg_fetch_result(pg_query($conn, "SELECT COALESCE(MAX(Id_Partido), 0) + 1 FROM Partido"), 0, 0);
-
-            $insert = pg_query_params($conn,
-                "INSERT INTO Partido (Id_Partido, Fecha, Hora, ID_equipo1, ID_equipo2, ID_Fase)
-                 VALUES ($1, $2, $3, $4, $5, $6)",
-                [$next_id, $fecha, $hora, $id_equipo1, $id_equipo2, $id_fase]
             );
 
-            $mensaje = $insert ? 'Partido agregado correctamente.' : 'Error al guardar: ' . pg_last_error($conn);
+            if (pg_num_rows($check) > 0) {
+                $mensaje = 'Traslape detectado: uno de los equipos ya tiene un partido programado a esa fecha y hora.';
+            } else {
+                $next_id = pg_fetch_result(pg_query($conn, "SELECT COALESCE(MAX(Id_Partido), 0) + 1 FROM Partido"), 0, 0);
+
+                $insert = pg_query_params($conn,
+                    "INSERT INTO Partido (Id_Partido, Fecha, Hora, ID_equipo1, ID_equipo2, ID_Fase)
+                    VALUES ($1, $2, $3, $4, $5, $6)",
+                    [$next_id, $fecha, $hora, $id_equipo1, $id_equipo2, $id_fase]
+                );
+
+                $mensaje = $insert ? 'Partido agregado correctamente.' : 'Error al guardar: ' . pg_last_error($conn);
+            }
         }
     }
 }

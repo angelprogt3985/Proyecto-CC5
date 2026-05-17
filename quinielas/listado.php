@@ -38,19 +38,22 @@
             JOIN Partido p ON pr.id_partido = p.id_partido
             JOIN Equipo E1 ON p.id_equipo1 = E1.id_equipo
             JOIN Equipo E2 ON p.id_equipo2 = E2.id_equipo
+            WHERE pr.ID_usuario <> 0
             ORDER BY pr.ID_usuario";
 
         $result = pg_query($conn, $query) or die('La query fallo: ' .pg_last_error($conn));
         if(pg_num_rows($result) == 0){
             echo "No hay quinielas";
         } else {
-             $nombreL = "";
+            $nombreL = "";
             $nombreV = "";
 
-            $idPar = 0;
-            $idPred = 0;
             $predGolL = 0; // Local
             $predGolV = 0; // Visitante
+
+            $golesL = 0;
+            $golesV = 0;
+
             $puntos = 0;
             echo "<div style='text-align:center;'>";
             echo "<table border = 1 style = 'margin:auto;'>\n";
@@ -63,41 +66,41 @@
 
             while ($line = pg_fetch_assoc($result)) {
 
+                $predGolL = $line["pred_gol1"];
+                $predGolV = $line["pred_gol2"];
+
+                if(isset($predGolL)){
+                    continue;
+                }
+                
                 $nombreL = $line["E_Local"];
                 $nombreV = $line["E_Visitante"];
-                
-                $idPar = $line["id_partido"];
 
                 $golesL = $line["goles_equip1"];
                 $golesV = $line["goles_equip2"];
 
-                $predGolL = $line["pred_gol1"];
-                $predGolV = $line["pred_gol2"];
-
                 $puntos = $line["puntos_obt"];
                 
-                    echo "\t<tr>\n";
-                    echo "\t\t<td>$nombreL - $nombreV</td>\n";
+                echo "\t<tr>\n";
+                echo "\t\t<td>$nombreL - $nombreV</td>\n";
 
-                    if(isset($golesL)){
-                        echo "\t\t<td>$golesL - $golesV</td>\n";
-                    } else {
-                        echo "Por definirse";
-                    }
+                if(isset($golesL)){
+                    echo "\t\t<td>$golesL - $golesV</td>\n";
+                } else {
+                    echo "Por definirse";
+                }
 
-                    echo "\t\t<td>$predGolL - $predGolV</td>\n";
+                echo "\t\t<td>$predGolL - $predGolV</td>\n";
 
-                    if(isset($golesL)){
-                        echo "\t\t<td>$puntos</td>\n";
-                    } else {
-                        echo "Por definirse";
-                    }
-                    
-                    echo "\t\t<td><a >
-                        <button style='background:red;color:white;'> Editar Quiniela </button></a></td>\n";
-                    echo "\t\t<td><a >
-                        <button style='background:red;color:white;'> Eliminar Quiniela </button></a></td>\n";
-                    echo "\t</tr>\n";
+                if(isset($golesL)){
+                    echo "\t\t<td>$puntos</td>\n";
+                } else {
+                    echo "Por definirse";
+                }
+
+                echo "\t\t<td><a >
+                    <button style='background:red;color:white;'> Eliminar Quiniela </button></a></td>\n";
+                echo "\t</tr>\n";
                         
             }
             echo "</table>\n";
@@ -122,10 +125,12 @@
             $nombreL = "";
             $nombreV = "";
 
-            $idPar = 0;
-            $idPred = 0;
             $predGolL = 0; // Local
             $predGolV = 0; // Visitante
+
+            $golesL = 0;
+            $golesV = 0;
+
             $puntos = 0;
             echo "<div style='text-align:center;'>";
             echo "<table border = 1 style = 'margin:auto;'>\n";
@@ -137,38 +142,41 @@
             echo "\t</tr>\n";
 
             while ($line = pg_fetch_assoc($result)) {
+                $predGolL = $line["pred_gol1"];
+                $predGolV = $line["pred_gol2"];
+
+                if(isset($predGolL)){
+                    continue;
+                }
 
                 $nombreL = $line["E_Local"];
                 $nombreV = $line["E_Visitante"];
-                
-                $idPar = $line["id_partido"];
 
                 $golesL = $line["goles_equip1"];
                 $golesV = $line["goles_equip2"];
 
-                $predGolL = $line["pred_gol1"];
-                $predGolV = $line["pred_gol2"];
-
                 $puntos = $line["puntos_obt"];
                 
-                    echo "\t<tr>\n";
-                    echo "\t\t<td>$nombreL - $nombreV</td>\n";
+                echo "\t<tr>\n";
+                echo "\t\t<td>$nombreL - $nombreV</td>\n";
 
-                    if(isset($golesL)){
-                        echo "\t\t<td>$golesL - $golesV</td>\n";
-                    } else {
-                        echo "Por definirse";
-                    }
+                if(isset($golesL)){
+                    echo "\t\t<td>$golesL - $golesV</td>\n";
+                } else {
+                    echo "Por definirse";
+                }
 
-                    echo "\t\t<td> <input type = 'number' name = 'predGolL[$idPar]' value = '$predGolL'> - <input type = 'number' name = 'predGolV[$idPar]' value = '$predGolV'></td>\n";
+                echo "\t\t<td> <input type = 'number' name = 'predGolL[$idPar]' value = '$predGolL'> - <input type = 'number' name = 'predGolV[$idPar]' value = '$predGolV'></td>\n";
                     
+                if(isset($golesL)){
                     echo "\t\t<td>$puntos</td>\n";
+                } else {
+                    echo "Por definirse";
+                }
                     
-                    echo "\t\t<td><a >
-                        <button style='background:red;color:white;'> Editar Quiniela </button></a></td>\n";
-                    echo "\t\t<td><a >
+                echo "\t\t<td><a >
                         <button style='background:red;color:white;'> Eliminar Quiniela </button></a></td>\n";
-                    echo "\t</tr>\n";
+                echo "\t</tr>\n";
                         
             }
             echo "</table>\n";
