@@ -49,21 +49,31 @@
 
     }
 
-    $queryP = "SELECT P.Id_Partido, E1.Nombre AS ELocal, E2.Nombre AS EVisitante
-        FROM Partido P
-        JOIN Equipo E1 ON P.ID_equipo1 = E1.ID_equipo
-        JOIN Equipo E2 ON P.ID_equipo2 = E2.ID_equipo
-        WHERE NOT EXISTS (
-            SELECT * FROM Prediccion PR
-            WHERE PR.Id_Partido = P.Id_Partido
-            AND PR.ID_usuario = {$_SESSION['id']}
-        ) 
-        ORDER BY P.Fecha";
+    $queryP = "SELECT P.Id_Partido, P.Fecha, P.Hora,
+        E1.Nombre AS ELocal, 
+        E2.Nombre AS EVisitante
+    FROM Partido P
+    JOIN Equipo E1 ON P.ID_equipo1 = E1.ID_equipo
+    JOIN Equipo E2 ON P.ID_equipo2 = E2.ID_equipo
+    WHERE NOT EXISTS (
+        SELECT * FROM Prediccion PR
+        WHERE PR.Id_Partido = P.Id_Partido
+        AND PR.ID_usuario = {$_SESSION['id']}
+    )
+    ORDER BY P.Fecha";
         
 
     $resultP = pg_query($conn, $queryP);
     $options = "";
     while ($fila = pg_fetch_assoc($resultP)) {
+        $fechaHoraPartido = strtotime($fila["fecha"] . " " . $fila["hora"]);
+        $limite = $fechaHoraPartido - (5 * 60);
+        $ahora = time();
+
+        if($ahora >= $limite){
+            continue;
+        }
+
         $options .= "<option value='{$fila["id_partido"]}'>";
         $options .= trim($fila["elocal"]) . " vs " . trim($fila["evisitante"]);
         $options .= "</option>";
