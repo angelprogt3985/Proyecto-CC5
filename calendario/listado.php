@@ -84,13 +84,16 @@ if (pg_num_rows($result) === 0) {
     echo "<p>No hay partidos registrados.</p>";
 } else {
     echo "<table border=1>";
+    $admin = $_SESSION["admin"];
+
     echo "<tr>
             <th>Fase</th>
             <th>Fecha</th>
             <th>Hora</th>
             <th>Local</th>
-            <th>Visitante</th>
-          </tr>";
+            <th>Visitante</th>";
+    if ($admin) echo "<th>Acciones</th>";
+    echo "</tr>";
 
     while ($row = pg_fetch_assoc($result)) {
         $fecha = date('d/m/Y', strtotime($row['fecha']));
@@ -101,8 +104,17 @@ if (pg_num_rows($result) === 0) {
                 <td>$fecha</td>
                 <td>$hora</td>
                 <td>{$row['equipo1']}</td>
-                <td>{$row['equipo2']}</td>
-              </tr>";
+                <td>{$row['equipo2']}</td>";
+
+        if ($admin) {
+            $pid = $row['id_partido'];
+            echo "<td>
+                    <a href='editar_partido.php?id=$pid'>Editar</a> |
+                    <a href='eliminar_partido.php?id=$pid' onclick=\"return confirm('Eliminar partido?')\">Eliminar</a>
+                  </td>";
+        }
+
+        echo "</tr>";
     }
     echo "</table>";
 }
