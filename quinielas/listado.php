@@ -30,7 +30,7 @@
 <?php
     $id = $_SESSION["id"];
     if ($_SESSION["admin"]){
-        $query = "SELECT pr.id_pred, p.id_partido, p.fecha, p.hora, pr.pred_gol1, pr.pred_gol2, pr.puntos_obt, 
+        $query = "SELECT pr.ID_usuario, pr.id_pred, p.id_partido, p.fecha, p.hora, pr.pred_gol1, pr.pred_gol2, pr.puntos_obt, 
             p.goles_equip1, p.goles_equip2, E1.nombre AS E_Local, 
             E2.nombre AS E_visitante
             FROM Prediccion pr
@@ -54,11 +54,13 @@
             $golesV = 0;
 
             $idPred = 0;
+            $idUsuario = 0;
 
             $puntos = 0;
             echo "<div style='text-align:center;'>";
             echo "<table border = 1 style = 'margin:auto;'>\n";
             echo "\t<tr>\n";
+            echo "\t\t<th><b>Usuario</b></th>\n";
             echo "\t\t<th><b>Partido</b></th>\n";
             echo "\t\t<th>Resultado</th>\n";
             echo "\t\t<th>Prediccion</th>\n";
@@ -76,7 +78,13 @@
                 if(!isset($predGolL)){
                     continue;
                 }
-                
+
+                $idUsuario = $line["id_usuario"];
+                $queryU = "SELECT Nombre FROM Usuario WHERE ID_usuario = $idUsuario";
+                $resultU = pg_query($conn, $queryU);
+                $fila = pg_fetch_assoc($resultU);
+                $nombreU = $fila["nombre"];
+
                 $nombreL = $line["e_local"];
                 $nombreV = $line["e_visitante"];
 
@@ -86,6 +94,7 @@
                 $puntos = $line["puntos_obt"];
                 
                 echo "\t<tr>\n";
+                echo "\t\t<td>$nombreU</td>\n";
                 echo "\t\t<td>$nombreL - $nombreV</td>\n";
 
                 if(isset($golesL)){
@@ -213,12 +222,14 @@
         <?php 
             if(!$_SESSION["admin"]){
                     echo "<a href=ingresar.php> Ingresar Prediccion </a><br>";
-                } else {
-                    echo "<a> Ingresar Resultado </a><br>";
                 }
         ?>
-         
-         <a href="../index.php"> Menu Principal</a>
+        
+        <a href="../calendario/listado.php"> Ver Partidos </a><br>
+        <a href="../equipos/listado.php"> Ver Equipos </a><br>
+        <a href="../fases/listado.php"> Ver Fases </a><br>
+        <a href="resultados.php"> Ver posiciones de los usuarios </a><br>
+        <a href="../index.php"> Menu Principal</a>
      </center>
   </body>
 </html>

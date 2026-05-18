@@ -69,7 +69,11 @@
                     echo "<a href=agregar.php> Agregar Equipo </a><br>";
                 } 
         ?>
-         <a href="../index.php"> Menu Principal</a>
+        <a href="../calendario/listado.php"> Ver Partidos </a><br>
+        <a href="../fases/listado.php"> Ver Fases </a><br>
+        <a href="../quinielas/listado.php"> Ver quinielas de los usuarios </a><br>
+        <a href="../quinielas/resultados.php"> Ver posiciones de los usuarios </a><br>
+        <a href="../index.php"> Menu Principal</a>
      </center>
   </body>
 </html>

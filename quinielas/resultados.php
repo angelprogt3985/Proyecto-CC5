@@ -49,7 +49,11 @@
     ?>
 
   <center>
-         <a href="../index.php"> Menu Principal</a>
+        <a href="../calendario/listado.php"> Ver Partidos </a><br>
+        <a href="../equipos/listado.php"> Ver Equipos </a><br>
+        <a href="../fases/listado.php"> Ver Fases </a><br>
+        <a href="..listado.php"> Ver quinielas de los usuarios </a><br>
+        <a href="../index.php"> Menu Principal</a>
      </center>
   </body>
 </html>

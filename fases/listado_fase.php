@@ -81,8 +81,17 @@
 ?>
 
     <center>
-         <a href="agregar_fase.php"> Agregar Equipo </a><br>
-         <a href="../index.php"> Menu Principal</a>
+         <?php
+            if($_SESSION["admin"]){
+                echo "<a href=fases/agregar_fase.php class=button>
+                <button>Agregar Fase</button></a><br>";
+            }
+        ?>
+        <a href="../calendario/listado.php"> Ver Partidos </a><br>
+        <a href="../equipos/listado.php"> Ver Equipos </a><br>
+        <a href="../quinielas/listado.php"> Ver quinielas de los usuarios </a><br>
+        <a href="../quinielas/resultados.php"> Ver posiciones de los usuarios </a><br>
+        <a href="../index.php"> Menu Principal</a>
      </center>
   </body>
 </html>

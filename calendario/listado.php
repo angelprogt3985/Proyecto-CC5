@@ -13,7 +13,12 @@
 
     <h2>Calendario de Partidos</h2>
 
-    <a href="../index.php">Inicio</a> 
+    <a href="../index.php">Inicio</a> |
+    <a href="../equipos/listado.php"> Ver Equipos </a> |
+    <a href="../fases/listado.php"> Ver Fases </a> |
+    <a href="../quinielas/listado.php"> Ver quinielas de los usuarios </a> |
+    <a href="../quinielas/resultados.php"> Ver posiciones de los usuarios </a>
+    
 
     <?php 
         if($_SESSION["admin"]){

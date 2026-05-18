@@ -32,7 +32,7 @@
                 <button>Agregar Fase</button></a><br>";
             }
         ?>
-        
+        <a href=fases/listado_fase.php class=button><button>Ver Fases</button></a><br>;
         
         <a href="equipos/listado.php" class = "button"><button>Listar Equipos</button></a><br>
 
