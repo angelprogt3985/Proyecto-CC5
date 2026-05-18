@@ -19,9 +19,7 @@
         if($_SESSION["admin"]){
             echo "| ";
             echo "<a href=agregar_partido.php>Agregar Partido</a>";
-
-            echo " | ";
-            echo "<a href=Resultado.php>Agregar Resultado</a>";
+            
         }
     ?>
 
@@ -111,7 +109,8 @@ if (pg_num_rows($result) === 0) {
             echo "<td>
                     <a href='editar_partido.php?id=$pid'>Editar</a> |
                     <a href='eliminar_partido.php?id=$pid' onclick=\"return confirm('Eliminar partido?')\">Eliminar</a>
-                  </td>";
+                    <a href=Resultado.php?id=$pid>Agregar Resultado</a>
+                    </td>";
         }
 
         echo "</tr>";
