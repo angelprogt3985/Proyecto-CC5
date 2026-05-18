@@ -4,12 +4,33 @@
     $id = $_SESSION["id"];
     if($_SERVER["REQUEST_METHOD"] == "POST" && !$_SESSION["admin"]){
         foreach($_POST["predGolL"] as $id_partido => $predL){
-            $predV = $_POST["predGolV"][$id_partido];
+             $predV = $_POST["predGolV"][$id_partido];
 
-            $query = "UPDATE Prediccion SET pred_gol1 = $predL, pred_gol2 = $predV
-            WHERE ID_Partido = $id_partido AND ID_usuario = $id";
+            $queryFecha = "SELECT fecha, hora 
+                        FROM Partido 
+                        WHERE id_partido = $id_partido";
 
-            pg_query($conn, $query) or die('La query fallo: ' .pg_last_error($conn));
+            $resultadoFecha = pg_query($conn, $queryFecha);
+
+            $partido = pg_fetch_assoc($resultadoFecha);
+
+            $fechaHoraPartido = strtotime($partido["fecha"] . " " . $partido["hora"]);
+
+            $limite = $fechaHoraPartido - (5 * 60);
+
+            $ahora = time();
+
+            if($ahora >= $limite){
+                echo "La predicción para el partido $id_partido ya no puede editarse.<br>";
+                continue;
+            }
+
+            $query = "UPDATE Prediccion 
+                    SET pred_gol1 = $predL, pred_gol2 = $predV
+                    WHERE ID_Partido = $id_partido 
+                    AND ID_usuario = $id";
+
+            pg_query($conn, $query) or die('La query fallo: ' . pg_last_error($conn));
         }
     }
 
