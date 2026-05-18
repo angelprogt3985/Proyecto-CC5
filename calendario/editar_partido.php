@@ -51,7 +51,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $mensaje = 'Todos los campos son obligatorios.';
     } elseif ($id_equipo1 === $id_equipo2) {
         $mensaje = 'Un equipo no puede jugar contra si mismo.';
-    } else {
+    } elseif ($id_fase == 1) {
+        $g1 = pg_fetch_assoc(pg_query_params($conn, "SELECT Grupo FROM Equipo WHERE ID_equipo = $1", [$id_equipo1]));
+        $g2 = pg_fetch_assoc(pg_query_params($conn, "SELECT Grupo FROM Equipo WHERE ID_equipo = $1", [$id_equipo2]));
+        if ($g1['grupo'] !== $g2['grupo']) {
+            $mensaje = 'Error: En fase de grupos los equipos deben ser del mismo grupo.';
+        }
+    }
+    if ($mensaje === '') {
         $check = pg_query_params($conn,
             "SELECT Id_Partido FROM Partido
              WHERE Fecha = $1 AND Hora = $2
