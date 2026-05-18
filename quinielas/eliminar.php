@@ -11,6 +11,20 @@
         $accion = $_POST["decision"];
         if ($accion == "si"){
             $id = $_POST["ID_Pred"];
+            $queryFecha = "SELECT P.fecha, P.hora
+               FROM Prediccion PR
+               JOIN Partido P ON PR.ID_Partido = P.ID_Partido
+               WHERE PR.ID_Pred = $id";
+
+            $resultadoFecha = pg_query($conn, $queryFecha);
+            $partido = pg_fetch_assoc($resultadoFecha);
+            $fechaHoraPartido = strtotime($partido["fecha"] . " " . $partido["hora"]);
+            $limite = $fechaHoraPartido - (5 * 60);
+            $ahora = time();
+
+            if($ahora >= $limite){
+                die("Ya no puedes eliminar esta predicción porque faltan menos de 5 minutos para el partido.");
+            }
             
             $query = "DELETE FROM Prediccion WHERE ID_Pred = $id";
             $result = pg_query($conn, $query);
