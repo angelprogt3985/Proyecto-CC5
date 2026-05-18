@@ -18,7 +18,16 @@
         $result = pg_query($conn, $query) or die('La query fallo: ' .pg_last_error($conn));
         $fila = pg_fetch_assoc($result); 
         $total = $fila["total"];
+
+        $queryG = "SELECT Grupo FROM Equipo WHERE Grupo = '$grupo' AND ID_Equipo = $id";
+        $resultG = pg_query($conn, $queryG);
+        $filaG = pg_fetch_assoc($resultG);
+        
         if($total < 4){
+            $query = "UPDATE Equipo SET Nombre = '$nombre', Bandera = '$bandera', Grupo = '$grupo' WHERE ID_Equipo = $id";
+            $result = pg_query($conn, $query) or die('La query fallo: ' .pg_last_error($conn));
+            echo "El equipo fue editado exitosamente";
+        } else if($filaG != 0){
             $query = "UPDATE Equipo SET Nombre = '$nombre', Bandera = '$bandera', Grupo = '$grupo' WHERE ID_Equipo = $id";
             $result = pg_query($conn, $query) or die('La query fallo: ' .pg_last_error($conn));
             echo "El equipo fue editado exitosamente";

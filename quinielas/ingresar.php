@@ -29,7 +29,7 @@
             echo "Error al guardar";
         }
 
-        pg_close($conn);
+        
 
     }
 
@@ -37,6 +37,11 @@
         FROM Partido P
         JOIN Equipo E1 ON P.ID_equipo1 = E1.ID_equipo
         JOIN Equipo E2 ON P.ID_equipo2 = E2.ID_equipo
+        WHERE NOT EXISTS (
+            SELECT * FROM Prediccion PR
+            WHERE PR.Id_Partido = P.Id_Partido
+            AND PR.ID_usuario = {$_SESSION['id']}
+        ) 
         ORDER BY P.Fecha";
         
 
@@ -85,7 +90,7 @@
 
     </form>
     <center>
-         <a href="listado.php"> Listado de equipos </a><br>
+         <a href="listado.php"> Ver Quinielas </a><br>
          <a href="../index.php"> Menu Principal </a>
      </center>
 </body>

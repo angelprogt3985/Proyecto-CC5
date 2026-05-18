@@ -18,30 +18,32 @@
 
         <h1>Quiniela</h1>
 
-        <a href="quinielas/listado.php" class = "button">Ver Quiniela</a><br>
+        <a href="quinielas/listado.php" class = "button"><button>Ver Quiniela</button></a><br>
         
         <?php
             if($_SESSION["admin"]){
-                echo "<a href=equipos/agregar.php class=button>Agregar Equipo</a><br>";
+                echo "<a href=equipos/agregar.php class=button><button>Agregar Equipo</button></a><br>";
             }
         ?>
 
          <?php
             if($_SESSION["admin"]){
-                echo "<a href=fases/agregar_fase.php class=button>Agregar Fase</a><br>";
+                echo "<a href=fases/agregar_fase.php class=button>
+                <button>Agregar Fase</button></a><br>";
             }
         ?>
         
         
-        <a href="equipos/listado.php" class = "button">Listar Equipos</a><br>
+        <a href="equipos/listado.php" class = "button"><button>Listar Equipos</button></a><br>
 
-        <a href="calendario/listado.php" class="button">Calendario</a><br>
+        <a href="calendario/listado.php" class="button"><button>Calendario</button></a><br>
 
-        <a href="grupos/tablas.php" class="button">Tablas de grupos</a><br>
+        <a href="grupos/tablas.php" class="button"><button>Tablas de grupos</button></a><br>
 
-        <button>Ver Resultados</button>
+        <a href="quinielas/resultados.php" class="button">
+        <button>Ver Resultados</button></a>
         
-        <a href="logout.php" class="button">Cerrar sesion</a><br>
+        <a href="logout.php" class="button"><button>Cerrar sesion</button></a><br>
     </div>
 
 </body>
