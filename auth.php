@@ -1,7 +1,8 @@
 <?php
     session_start();
     if(!isset($_SESSION["id"])){
-        header("Location: /R/ProyectoCC/Proyecto-CC5/login.php");
+        $base = "http://" . $_SERVER['HTTP_HOST'];
+        header("Location: $base/login.php");
         exit;
     }
 ?>
