@@ -13,7 +13,7 @@
   <body>
 
 <?php
-    $query = "SELECT * FROM Equipo ORDER BY Nombre";
+    $query = "SELECT * FROM Equipo ORDER BY ID_Equipo";
 
     $result = pg_query($conn, $query) or die('La query fallo: ' .pg_last_error($conn));
     if(pg_num_rows($result) == 0){
