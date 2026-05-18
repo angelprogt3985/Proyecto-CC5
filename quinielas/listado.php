@@ -248,7 +248,7 @@
         
         <a href="../calendario/listado.php"> Ver Partidos </a><br>
         <a href="../equipos/listado.php"> Ver Equipos </a><br>
-        <a href="../fases/listado.php"> Ver Fases </a><br>
+        <a href="../fases/listado_fase.php"> Ver Fases </a><br>
         <a href="resultados.php"> Ver posiciones de los usuarios </a><br>
         <a href="../index.php"> Menu Principal</a>
      </center>

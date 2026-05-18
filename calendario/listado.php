@@ -15,7 +15,7 @@
 
     <a href="../index.php">Inicio</a> |
     <a href="../equipos/listado.php"> Ver Equipos </a> |
-    <a href="../fases/listado.php"> Ver Fases </a> |
+    <a href="../fases/listado_fase.php"> Ver Fases </a> |
     <a href="../quinielas/listado.php"> Ver quinielas de los usuarios </a> |
     <a href="../quinielas/resultados.php"> Ver posiciones de los usuarios </a>
     
