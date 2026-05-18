@@ -11,51 +11,48 @@
 
     if($_SERVER["REQUEST_METHOD"] == "POST"){
 
-        $accion = $_POST["decision"];
+        $id = $_POST["ID_Fase"];
+        $nombre = $_POST["Nombre"];
+        $orden = $_POST["Orden"];
 
-        if($accion == "si"){
+        $query = "SELECT * FROM Fase 
+                  WHERE Orden = $orden 
+                  AND ID_Fase != $id";
 
-            $id = $_POST["ID_Fase"];
-            $nombre = $_POST["Nombre"];
-            $orden = $_POST["Orden"];
+        $result = pg_query($conn, $query)
+            or die('La query fallo: ' . pg_last_error($conn));
 
-            $query = "DELETE FROM Fase WHERE ID_Fase = $id";
+        if(pg_num_rows($result) > 0){
 
-            $result = pg_query($conn, $query);
-
-            if(!$result){
-
-                echo "Error: No se puede eliminar la fase.";
-
-            } else {
-
-                header("Location: listado_fase.php");
-                exit;
-            }
+            $mensaje = "Ya existe otra fase con ese orden";
 
         } else {
 
-            header("Location: listado_fase.php");
-            exit;
+            $query = "UPDATE Fase
+                      SET Nombre = '$nombre',
+                          Orden = $orden
+                      WHERE ID_Fase = $id";
+
+            $result = pg_query($conn, $query)
+                or die('La query fallo: ' . pg_last_error($conn));
+
+            $mensaje = "La fase fue editada exitosamente";
         }
     }
-
-    pg_close($conn);
 ?>
 
 <html>
-
 <head>
     <link rel="stylesheet" href="../style.css">
     <meta charset="UTF-8">
     <title>
-        Fases - Eliminar
+        Fases - Editar
     </title>
 </head>
 
 <body>
 
-    <h1>Eliminar fase</h1>
+    <h1>Editar fase</h1>
 
     <?php
         echo $mensaje;
@@ -69,33 +66,42 @@
             $nombre = $_GET["Nombre"];
             $orden = $_GET["Orden"];
 
-            echo "<b>ID de la fase: </b>$id<br>\n";
-            echo "<input type='hidden' name='ID_Fase' value='$id' required><br>";
+            echo "<b>ID de la fase:</b> $id<br>\n";
 
-            echo "<b>Nombre de la fase: </b>$nombre<br>\n";
-            echo "<input type='hidden' name='Nombre' value='$nombre' required><br>";
+            echo "<input type='hidden' 
+                         name='ID_Fase' 
+                         value='$id' required><br>";
 
-            echo "<b>Orden: </b>$orden<br>\n";
-            echo "<input type='hidden' name='Orden' value='$orden' required><br>";
+            echo "<b>Nombre de la fase</b><br>\n";
+
+            echo "<input type='text'
+                         name='Nombre'
+                         value='$nombre'
+                         required><br>\n";
+
+            echo "<b>Orden</b><br>\n";
+
+            echo "<input type='number'
+                         name='Orden'
+                         value='$orden'
+                         required><br>\n";
         ?>
 
-        <h4>¿Quieres eliminar la fase?</h4>
-
-        <button type="submit" name="decision" value="si">
-            Si
-        </button>
-
-        <button type="submit" name="decision" value="no">
-            No
+        <button type="submit">
+            Enviar
         </button>
 
     </form>
 
     <center>
-         <a href="listado_fase.php">Listado de fases</a><br>
-         <a href="agregar_fase.php">Agregar fase</a><br>
-         <a href="../index.php">Menu Principal</a>
+        <a href="listado.php">Listado de fases</a><br>
+        <a href="agregar.php">Agregar fase</a><br>
+        <a href="../index.php">Menu Principal</a>
     </center>
 
 </body>
 </html>
+
+<?php
+    pg_close($conn);
+?>
