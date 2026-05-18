@@ -59,7 +59,7 @@
      </title>
   </head>
   <body>
-    <h1>Agregar equipo</h1>
+    <h1>Agregar Fase</h1>
     <?php
         echo $mensaje;
     ?>
