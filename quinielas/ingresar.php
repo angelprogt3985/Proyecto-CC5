@@ -11,9 +11,25 @@
         $id_partido = $_POST["partido"];
         $id_usuario = $_SESSION["id"];
 
+        $queryFecha = "SELECT fecha, hora
+               FROM Partido
+               WHERE id_partido = $id_partido";
+
+        $resultadoFecha = pg_query($conn, $queryFecha);
+        $partido = pg_fetch_assoc($resultadoFecha);
+        $fechaHoraPartido = strtotime($partido["fecha"] . " " . $partido["hora"]);
+        $limite = $fechaHoraPartido - (5 * 60);
+        $ahora = time();
+
+        if($ahora >= $limite){
+            die("Ya no puedes agregar una predicción porque faltan menos de 5 minutos para el partido.");
+        }
+
         $pred_gol1 = $_POST["goles1"];
         $pred_gol2 = $_POST["goles2"];
         $puntos_obt = 0;
+
+
 
         $query = "INSERT INTO Prediccion
                 (ID_Pred, Id_Partido, ID_usuario, pred_gol1, pred_gol2, puntos_obt)
